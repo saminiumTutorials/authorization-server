@@ -47,7 +47,6 @@ public class SecurityConfig {
         http.getConfigurer(OAuth2AuthorizationServerConfigurer.class)
                 .oidc(Customizer.withDefaults()); // Enable OpenID Connect 1.0
 
-
         http
                 .cors()
                 .configurationSource(corsConfigurationSource())
@@ -90,7 +89,7 @@ public class SecurityConfig {
                 .clientSecret("{noop}secret")
                 .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
                 .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
-                .redirectUri("http://localhost:8282/api/swagger")
+                .redirectUri("http://localhost:8282/api")
                 .scope("swagger.read")
                 .scope("swagger.write")
                 .clientSettings(ClientSettings.builder().requireAuthorizationConsent(false).build())
@@ -145,7 +144,17 @@ public class SecurityConfig {
                 HttpMethod.OPTIONS.name(),
                 HttpMethod.PATCH.name()));
 
-        configuration.setAllowedHeaders(List.of("Content-Type, api_key, X-Requested-With, Authorization, DNT,X-CustomHeader,Keep-Alive,User-Agent,X-Requested-With,If-Modified-Since,Cache-Control,Content-Type,Content-Range,Range"));
+        configuration.setAllowedHeaders(List.of("Content-Type, api_key, " +
+                "X-Requested-With, " +
+                "Authorization, " +
+                "DNT,X-CustomHeader," +
+                "Keep-Alive,User-Agent," +
+                "X-Requested-With," +
+                "If-Modified-Since," +
+                "Cache-Control," +
+                "Content-Type," +
+                "Content-Range,Range"));
+
         configuration.setAllowedOrigins(List.of("*"));
         configuration.setAllowCredentials(true);
         configuration.addExposedHeader("Authorization");
