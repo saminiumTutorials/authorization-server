@@ -70,9 +70,7 @@ public class SecurityConfig {
     public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http)
             throws Exception {
         http
-
                 .authorizeHttpRequests((authorize) -> authorize
-
                         .anyRequest().authenticated()
                 )
                 // Form login handles the redirect to the login page from the
@@ -88,6 +86,7 @@ public class SecurityConfig {
                 .clientId("swagger-client")
                 .clientSecret("{noop}secret")
                 .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
+                .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_POST)
                 .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
                 .redirectUri("http://localhost:8282/api")
                 .scope("swagger.read")
